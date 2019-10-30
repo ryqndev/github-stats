@@ -1,0 +1,12 @@
+{
+  "name": "github-profile-stats",
+  "version": "1.0.0",
+  "description": "Updates a gist on your profile whenever you push to Github",
+  "main": "script.js",
+  "scripts": {
+    "update": "node script.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Ryan Yang",
+  "license": "MIT"
+}
