@@ -1,15 +1,18 @@
 const fs = require('fs');
 const request = require('request');
+const { GistBox } = require('gist-box');
+require('dotenv').config()
 
-let shadedBlock = '█';
-let emptyBlock = '░';
+const { GIST_ID, GITHUB_TOKEN, GITHUB_USER } = process.env
 
-let defaultOptions = {
-    username: 'ryqndev',
-    commits: true,
+let options = {
+    username: GITHUB_USER,
+    token: GITHUB_TOKEN,
+    gistid: GIST_ID
 }
 
-const makeProfile = async (options = defaultOptions) => {
+
+const makeProfile = async () => {
     const requestOptions = {
         url: `https://api.github.com/users/${options.username}/events`,
         headers: {
@@ -55,26 +58,30 @@ const parseCommits = ( repoStats, event ) => {
     }
 }
 const printCommits = ( commitData ) => {
+    let shadedBlock = '█', emptyBlock = '░';
     let content = `Most Recent Repo Commit: ${commitData.stats.first.toUTCString()}\n`;
     let repoNames = Object.keys(commitData.repos);
     repoNames.sort( (a, b) => {return commitData.repos[b] - commitData.repos[a]});
     repoNames.forEach(repo => {
         let percent = commitData.repos[repo] / commitData.stats.total;
         let shaded = parseInt(percent * 19) + 1;
-        content += `${repo.padEnd(26, ' ')}
-            ${shadedBlock.repeat(shaded)}
-            ${emptyBlock.repeat(20 - shaded)} 
-            ${commitData.repos[repo]} commits\n`;
+        content += `${repo.padEnd(26, ' ')}${shadedBlock.repeat(shaded)}${emptyBlock.repeat(20 - shaded)} ${commitData.repos[repo]} commits\n`;
     })
     return content;
 }
-const prettyPrintData = ( data ) => {
+const prettyPrintData = async ( data ) => {
     let content = '';
     content += printCommits(data.commits);
-    fs.writeFile('./profile_gist.txt', content, (err) => {
-        if (err) throw err;
-    });
+    let id = options.gistid, token = options.token
+    const box = new GistBox({ id, token })
+
+    await box.update({
+        filename: 'profile_gist.txt',
+        description: 'my recent activity',
+        content: content
+    })
     return content;
 }
+
 
 module.exports = makeProfile;
