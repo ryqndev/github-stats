@@ -60,7 +60,7 @@ const printCommits = ( commitData ) => {
     repoNames.forEach(repo => {
         let percent = commitData.repos[repo] / commitData.stats.total;
         let shaded = parseInt(percent * 19) + 1;
-        content += (repo.padEnd(27, ' ') 
+        content += (repo.padEnd(24, ' ') 
             + shadedBlock.repeat(shaded) 
             + emptyBlock.repeat(20 - shaded) 
             + ' '
