@@ -13,9 +13,9 @@ that is displayed on the user's github profile.
 1. Clone/Fork this repository.
 2. Create a file named '.env' in the directory
 3. Copy the text from 'user-sample.env' into your '.env'
-4. Fill out the information [see](#What-data-do-I-put-in-the-'.env'-file?)
+4. Fill out the information [see](#what-data-do-i-put-in-the-env-file)
 5. Execute the script with 
-```shell
+```bash
 MacBook-Pro:github-profile-stats ryanyang$ npm run update
 ```
 

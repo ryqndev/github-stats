@@ -75,6 +75,7 @@ const printCommits = ( commitData ) => {
 const prettyPrintData = async ( data ) => {
     let content = '';
     content += printCommits(data.commits);
+    content += `\nSource: https://github.com/ryqndev/github-stats`;
     let id = options.gistid, token = options.token
     const box = new GistBox({ id, token })
 
