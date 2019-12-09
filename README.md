@@ -28,7 +28,7 @@ https://gist.github.com/ryqndev/0d8d1f8ae63085cfc6c850538233d2ae
 
 The last part is your gist id so you should have:
 ```
-GIST_id=0d8d1f8ae63085cfc6c850538233d2ae
+GIST_ID=0d8d1f8ae63085cfc6c850538233d2ae
 ```
 ---
 Github token is a private security token that you use to give gist push permissions. Follow the steps [here](https://help.github.com/en/github/authenticating-to-github/creating-a-personal-access-token-for-the-command-line) to make a Github token
